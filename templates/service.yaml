@@ -3,9 +3,13 @@ kind: Service
 metadata:
   name: jupyter-notebook-service
 spec:
+  type: {{ .Values.service.type }}
   selector:
     app: jupyter-notebook
   ports:
   - protocol: TCP
-    port: 8888
+    port: {{ .Values.service.externalPort | default 8888 }}
     targetPort: 8888
+    {{ if (and (eq .Values.service.type "NodePort") (not (empty .Values.service.nodePort.http))) }}
+    nodePort: {{ .Values.service.nodePort.http }}
+    {{- end -}}

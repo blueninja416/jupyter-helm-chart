@@ -1,0 +1,6 @@
+service:
+  # Set to NodePort to access from outside the cluster
+  type: "ClusterIP"
+  externalPort: {}
+  nodePort:
+    http: {}
