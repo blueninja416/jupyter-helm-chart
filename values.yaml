@@ -1,6 +1,17 @@
+configMap:
+  name: jupyter-notebook-configmap
+
+
+deployment:
+  name: jupyter-notebook-deployment
+  image: nbgallery/base-notebook:notebook-6.4.4
+  env:
+    nbgalleryURL: https://nbgallery.jupyterathome.org
+
 service:
+  name: jupyter-notebook-service
   # Set to NodePort to access from outside the cluster
-  type: "ClusterIP"
+  type: "NodePort"
   externalPort: {}
   nodePort:
-    http: {}
+    http: 30146

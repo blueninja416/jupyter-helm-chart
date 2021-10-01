@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jupyter-notebook-deployment
+  name: {{ .Values.deployment.name }}
 spec:
   selector:
     matchLabels:
@@ -14,6 +14,17 @@ spec:
     spec:
       containers:
       - name: jupyter
-        image: nbgallery/base-notebook:notebook-6.4.2
+        image: {{ .Values.deployment.image }}
+        env:
+        - name: NBGALLERY_URL
+          value: {{ .Values.deployment.env.nbgalleryURL }}
         ports:
         - containerPort: 8888
+        volumeMounts:
+        - name: config-map
+          mountPath: /opt/conda/etc/jupyter/jupyter_notebook_config.py
+          subPath: jupyter_notebook_config.py
+      volumes:
+      - name: config-map
+        configMap:
+          name: {{ .Values.configMap.name }}
