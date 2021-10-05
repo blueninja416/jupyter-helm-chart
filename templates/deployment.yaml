@@ -24,7 +24,11 @@ spec:
         - name: config-map
           mountPath: /opt/conda/etc/jupyter/jupyter_notebook_config.py
           subPath: jupyter_notebook_config.py
+        - name: notebook-dir
+          mountPath: /home/jovyan/notebooks
       volumes:
       - name: config-map
         configMap:
           name: {{ .Values.configMap.name }}
+      - name: notebook-dir
+        emptyDir: {}
