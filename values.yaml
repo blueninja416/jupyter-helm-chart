@@ -1,6 +1,3 @@
-global:
-  namespace: jupyter
-
 configMap:
   name: jupyter-notebook-configmap
 
