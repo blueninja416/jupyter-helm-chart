@@ -13,7 +13,7 @@ deployment:
 service:
   name: jupyter-notebook-service
   # Set to NodePort to access from outside the cluster
-  type: "NodePort"
+  type: "ClusterIP"
   externalPort: {}
   nodePort:
     http: 30146
